@@ -2,17 +2,11 @@ import React from "react";
 import { Box, List, ListItemButton, ListItemIcon, ListItemText, Button } from "@mui/material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import CheckBoxIcon from "@mui/icons-material/CheckBox";
-import GridViewIcon from "@mui/icons-material/GridView";
-import OpacityIcon from "@mui/icons-material/Opacity";
-import PaymentIcon from "@mui/icons-material/Payment";
 import LocalMallIcon from "@mui/icons-material/LocalMall";
 import { useNavigate } from "react-router-dom";
 
 const menuItems = [
   { text: "Grocery List", icon: <CheckBoxIcon />, active: true, path: "/" },
-  { text: "Category", icon: <GridViewIcon /> },
-  // { text: "Brands", icon: <OpacityIcon /> },
-  // { text: "Payment", icon: <PaymentIcon /> },
 ];
 
 const Sidebar = () => {

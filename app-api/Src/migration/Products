@@ -1,0 +1,67 @@
+use grocery_mart;
+
+db.products.deleteMany({});
+
+db.products.insertMany([
+
+/* ================= Fruits & Vegetables ================= */
+{ name: "Apple", price: 1.20, oldPrice: 1.50, brand: "Fresh Farm", category: "Fruits & Vegetables", image: "https://images.unsplash.com/photo-1567306226416-28f0efdc88ce?w=400&q=80" },
+{ name: "Banana", price: 0.80, oldPrice: 1.00, brand: "Tropical", category: "Fruits & Vegetables", image: "https://images.unsplash.com/photo-1574226516831-e1dff420e8f8?w=400&q=80" },
+{ name: "Orange", price: 1.10, oldPrice: 1.40, brand: "Citrus World", category: "Fruits & Vegetables", image: "https://images.unsplash.com/photo-1580052614034-c55d20bfee3b?w=400&q=80" },
+{ name: "Carrot", price: 0.90, oldPrice: 1.20, brand: "Green Valley", category: "Fruits & Vegetables", image: "https://images.unsplash.com/photo-1582515073490-dc4b6f9b0d32?w=400&q=80" },
+{ name: "Tomato", price: 1.00, oldPrice: 1.30, brand: "Organic Hub", category: "Fruits & Vegetables", image: "https://images.unsplash.com/photo-1546094096-0df4bcaaa337?w=400&q=80" },
+{ name: "Potato", price: 0.70, oldPrice: 0.90, brand: "Farm Fresh", category: "Fruits & Vegetables", image: "https://images.unsplash.com/photo-1518977676601-b53f82aba655?w=400&q=80" },
+{ name: "Spinach", price: 1.50, oldPrice: 1.80, brand: "Leafy Farm", category: "Fruits & Vegetables", image: "https://images.unsplash.com/photo-1576045057995-568f588f82fb?w=400&q=80" },
+{ name: "Mango", price: 2.00, oldPrice: 2.50, brand: "Tropical Gold", category: "Fruits & Vegetables", image: "https://images.unsplash.com/photo-1553279768-865429fa0078?w=400&q=80" },
+{ name: "Onion", price: 0.60, oldPrice: 0.80, brand: "Farm Fresh", category: "Fruits & Vegetables", image: "https://images.unsplash.com/photo-1508747703725-719777637510?w=400&q=80" },
+{ name: "Cucumber", price: 0.95, oldPrice: 1.20, brand: "Green Basket", category: "Fruits & Vegetables", image: "https://images.unsplash.com/photo-1604977042946-1eecc30f269e?w=400&q=80" },
+
+/* ================= Dairy & Eggs ================= */
+{ name: "Milk", price: 2.29, oldPrice: 2.99, brand: "Dairy Best", category: "Dairy & Eggs", image: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=400&q=80" },
+{ name: "Cheese", price: 3.50, oldPrice: 4.00, brand: "Cheddar Co", category: "Dairy & Eggs", image: "https://images.unsplash.com/photo-1486297678162-eb2a19b0a32d?w=400&q=80" },
+{ name: "Butter", price: 2.80, oldPrice: 3.20, brand: "Golden Dairy", category: "Dairy & Eggs", image: "https://images.unsplash.com/photo-1585238342024-78d387f4a707?w=400&q=80" },
+{ name: "Yogurt", price: 1.20, oldPrice: 1.50, brand: "Fresh Dairy", category: "Dairy & Eggs", image: "https://images.unsplash.com/photo-1604908176997-4311a0d64b7f?w=400&q=80" },
+{ name: "Eggs (12 pack)", price: 3.00, oldPrice: 3.50, brand: "Happy Hen", category: "Dairy & Eggs", image: "https://images.unsplash.com/photo-1518569656558-1f25e69d93d7?w=400&q=80" },
+{ name: "Cream", price: 1.90, oldPrice: 2.20, brand: "Dairy Best", category: "Dairy & Eggs", image: "https://images.unsplash.com/photo-1604909053197-0c0b2d7fca7d?w=400&q=80" },
+{ name: "Paneer", price: 3.20, oldPrice: 3.70, brand: "Milky Farm", category: "Dairy & Eggs", image: "https://images.unsplash.com/photo-1627308595229-7830a5c91f9f?w=400&q=80" },
+{ name: "Ghee", price: 5.50, oldPrice: 6.00, brand: "Pure Gold", category: "Dairy & Eggs", image: "https://images.unsplash.com/photo-1625944230945-1b7dd3b949ab?w=400&q=80" },
+{ name: "Flavored Milk", price: 1.80, oldPrice: 2.10, brand: "Dairy Best", category: "Dairy & Eggs", image: "https://images.unsplash.com/photo-1599785209707-a456fc1337bb?w=400&q=80" },
+{ name: "Curd", price: 1.50, oldPrice: 1.80, brand: "Fresh Dairy", category: "Dairy & Eggs", image: "https://images.unsplash.com/photo-1604908177522-040c6d6e9a2f?w=400&q=80" },
+
+/* ================= Beverages ================= */
+{ name: "Orange Juice", price: 2.50, oldPrice: 3.00, brand: "Juicy", category: "Beverages", image: "https://images.unsplash.com/photo-1600271886742-f049cd451bba?w=400&q=80" },
+{ name: "Apple Juice", price: 2.30, oldPrice: 2.80, brand: "Juicy", category: "Beverages", image: "https://images.unsplash.com/photo-1572441713132-51c75654db73?w=400&q=80" },
+{ name: "Cola", price: 1.50, oldPrice: 1.80, brand: "Cool Cola", category: "Beverages", image: "https://images.unsplash.com/photo-1622483767028-3f66f32aef6c?w=400&q=80" },
+{ name: "Green Tea", price: 3.00, oldPrice: 3.50, brand: "Tea Leaf", category: "Beverages", image: "https://images.unsplash.com/photo-1558160074-4d7d8bdf4256?w=400&q=80" },
+{ name: "Coffee", price: 4.00, oldPrice: 4.50, brand: "Brew Master", category: "Beverages", image: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=400&q=80" },
+{ name: "Mineral Water", price: 1.00, oldPrice: 1.20, brand: "Pure Drop", category: "Beverages", image: "https://images.unsplash.com/photo-1564419320461-6870880221ad?w=400&q=80" },
+{ name: "Energy Drink", price: 2.80, oldPrice: 3.20, brand: "PowerUp", category: "Beverages", image: "https://images.unsplash.com/photo-1598514982450-9d2e7b6f2e3e?w=400&q=80" },
+{ name: "Lemonade", price: 1.60, oldPrice: 2.00, brand: "Fresh Sip", category: "Beverages", image: "https://images.unsplash.com/photo-1527169402691-a3fbfa4f6e8b?w=400&q=80" },
+{ name: "Iced Tea", price: 2.20, oldPrice: 2.60, brand: "Tea Leaf", category: "Beverages", image: "https://images.unsplash.com/photo-1497534446932-c925b458314e?w=400&q=80" },
+{ name: "Milkshake", price: 3.20, oldPrice: 3.80, brand: "Sweet Treat", category: "Beverages", image: "https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=400&q=80" },
+
+/* ================= Snacks ================= */
+{ name: "Potato Chips", price: 1.50, oldPrice: 1.90, brand: "Crunchy", category: "Snacks", image: "https://images.unsplash.com/photo-1615485290382-441e4d049cb5?w=400&q=80" },
+{ name: "Nachos", price: 2.00, oldPrice: 2.40, brand: "Spicy Bites", category: "Snacks", image: "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=400&q=80" },
+{ name: "Popcorn", price: 1.80, oldPrice: 2.20, brand: "Movie Snack", category: "Snacks", image: "https://images.unsplash.com/photo-1585238341989-4e1e8bcbf9e3?w=400&q=80" },
+{ name: "Chocolate Bar", price: 1.20, oldPrice: 1.50, brand: "SweetCo", category: "Snacks", image: "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=400&q=80" },
+{ name: "Biscuits", price: 1.40, oldPrice: 1.70, brand: "BakeTime", category: "Snacks", image: "https://images.unsplash.com/photo-1589987607627-1f4b08c0c6f9?w=400&q=80" },
+{ name: "Peanuts", price: 1.00, oldPrice: 1.30, brand: "Nutty", category: "Snacks", image: "https://images.unsplash.com/photo-1590080874088-eec64895b423?w=400&q=80" },
+{ name: "Protein Bar", price: 2.50, oldPrice: 3.00, brand: "FitSnack", category: "Snacks", image: "https://images.unsplash.com/photo-1601004890684-d8cbf643f5f2?w=400&q=80" },
+{ name: "Trail Mix", price: 2.80, oldPrice: 3.20, brand: "Healthy Bite", category: "Snacks", image: "https://images.unsplash.com/photo-1505575967455-40e256f73376?w=400&q=80" },
+{ name: "Candy", price: 0.90, oldPrice: 1.20, brand: "SweetCo", category: "Snacks", image: "https://images.unsplash.com/photo-1575224300306-1b8da36134ec?w=400&q=80" },
+{ name: "Crackers", price: 1.60, oldPrice: 2.00, brand: "Crunchy", category: "Snacks", image: "https://images.unsplash.com/photo-1604908177250-3e8c7c3d6c02?w=400&q=80" },
+
+/* ================= Bakery ================= */
+{ name: "Bread", price: 2.00, oldPrice: 2.50, brand: "BakeTime", category: "Bakery", image: "https://images.unsplash.com/photo-1509440159596-0249088772ff?w=400&q=80" },
+{ name: "Croissant", price: 1.50, oldPrice: 1.80, brand: "French Bake", category: "Bakery", image: "https://images.unsplash.com/photo-1588196749597-9ff075ee6b5b?w=400&q=80" },
+{ name: "Muffin", price: 1.80, oldPrice: 2.20, brand: "Sweet Oven", category: "Bakery", image: "https://images.unsplash.com/photo-1589308078055-eb8b7d8f5b6a?w=400&q=80" },
+{ name: "Donut", price: 1.20, oldPrice: 1.50, brand: "Sweet Treat", category: "Bakery", image: "https://images.unsplash.com/photo-1551024601-bec78aea704b?w=400&q=80" },
+{ name: "Bagel", price: 1.60, oldPrice: 2.00, brand: "BakeTime", category: "Bakery", image: "https://images.unsplash.com/photo-1514516870926-205d5a2b44e0?w=400&q=80" },
+{ name: "Cupcake", price: 1.70, oldPrice: 2.10, brand: "Sweet Oven", category: "Bakery", image: "https://images.unsplash.com/photo-1587248720327-8eb72564be1e?w=400&q=80" },
+{ name: "Brownie", price: 2.20, oldPrice: 2.60, brand: "ChocoBake", category: "Bakery", image: "https://images.unsplash.com/photo-1606312619070-d48b4c652a52?w=400&q=80" },
+{ name: "Puff Pastry", price: 2.00, oldPrice: 2.40, brand: "French Bake", category: "Bakery", image: "https://images.unsplash.com/photo-1608198093002-ad4e005484ec?w=400&q=80" },
+{ name: "Bun", price: 1.30, oldPrice: 1.60, brand: "BakeTime", category: "Bakery", image: "https://images.unsplash.com/photo-1608198092452-30f5b6d9d89e?w=400&q=80" },
+{ name: "Garlic Bread", price: 2.50, oldPrice: 3.00, brand: "Italian Bake", category: "Bakery", image: "https://images.unsplash.com/photo-1549931319-a545dcf3bc73?w=400&q=80" }
+
+]);

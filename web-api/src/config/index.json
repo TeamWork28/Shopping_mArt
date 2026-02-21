@@ -1,0 +1,9 @@
+{
+    "api_config_v1": {
+        "host": "http://localhost:3001",
+        "routes": {
+            "get_products": "/api/v1/products/list",
+            "get_categories": "/api/v1/categories/list"
+        }
+    }
+}
