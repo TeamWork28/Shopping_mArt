@@ -1,0 +1,309 @@
+{
+  "info": {
+    "_postman_id": "bba1ddb8-3c0e-4d7d-a625-02278b7e1dfa",
+    "name": "Grocery Mart",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "50384206",
+    "_collection_link": "https://go.postman.co/collection/50384206-bba1ddb8-3c0e-4d7d-a625-02278b7e1dfa?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Products",
+      "item": [
+        {
+          "name": "list",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://{{endpoint}}/api/v1/products/list",
+              "protocol": "http",
+              "host": [
+                "{{endpoint}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "products",
+                "list"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "list",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://{{endpoint}}/api/v1/users/role",
+              "protocol": "http",
+              "host": [
+                "{{endpoint}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "users",
+                "role"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Sign in",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"email\": \"mithran@gmail.com\",\n    \"password\": \"pass@123\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://{{endpoint}}/api/v1/users/sign/in",
+              "protocol": "http",
+              "host": [
+                "{{endpoint}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "users",
+                "sign",
+                "in"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Sign out",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"fullName\": \"Mithran VP\",\n    \"email\": \"mithran@gmail.com\",\n    \"mobileNumber\": \"8072496813\",\n    \"password\": \"pass@123\",\n    \"role\":\"699a896c50e8b6b721a63600\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://{{endpoint}}/api/v1/users/sign/up",
+              "protocol": "http",
+              "host": [
+                "{{endpoint}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "users",
+                "sign",
+                "up"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Categories",
+      "item": [
+        {
+          "name": "list",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "token",
+                "value": "{{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://{{endpoint}}/api/v1/categories/list",
+              "protocol": "http",
+              "host": [
+                "{{endpoint}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "categories",
+                "list"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Cart",
+      "item": [
+        {
+          "name": "add",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "token",
+                "value": "{{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"userId\": \"699a8c7c5ef161e7d5022510\",\n    \"productId\": \"699952b750e8b6b721a635d2\",\n    \"quantity\": 1\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://{{endpoint}}/api/v1/checkout/add/cart",
+              "protocol": "http",
+              "host": [
+                "{{endpoint}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "checkout",
+                "add",
+                "cart"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "list",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "token",
+                "value": "{{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://{{endpoint}}/api/v1/checkout/get/cart",
+              "protocol": "http",
+              "host": [
+                "{{endpoint}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "checkout",
+                "get",
+                "cart"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "endpoint",
+      "value": ""
+    },
+    {
+      "key": "token",
+      "value": ""
+    }
+  ]
+}

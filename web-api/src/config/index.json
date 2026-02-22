@@ -5,7 +5,9 @@
             "sign_up": "/api/v1/users/sign/up",
             "sign_in": "/api/v1/users/sign/in",
             "get_products": "/api/v1/products/list",
-            "get_categories": "/api/v1/categories/list"
+            "get_categories": "/api/v1/categories/list",
+            "get_carts": "/api/v1/checkout/get/cart",
+            "add_carts": "/api/v1/checkout/add/cart"
         }
     }
 }

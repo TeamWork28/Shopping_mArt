@@ -1,5 +1,7 @@
 import React from "react";
 import defaultImg from "../asserts/no_image.png";
+import { getCarts, addCarts } from '../apiService/carts';
+import { useNavigate } from "react-router-dom";
 
 import {
   Card,
@@ -11,12 +13,19 @@ import {
 } from "@mui/material";
 
 export default function ProductCard({
+  id,
   name,
   image,
   price,
   oldPrice,
   brand,
 }) {
+  const navigate = useNavigate();
+
+  async function addCart(productId) {
+    addCarts({ productId: productId, quantity: 1 })
+    navigate('/products')
+  }
   return (
     <Card
       sx={{
@@ -73,6 +82,7 @@ export default function ProductCard({
         <Button
           fullWidth
           variant="contained"
+          onClick={() => addCart(id)}
           sx={{
             mt: 2,
             backgroundColor: "#0B8A4B",

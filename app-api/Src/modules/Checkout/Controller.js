@@ -49,4 +49,15 @@ module.exports = {
 
         }
     },
+    placeOrder: async function (req, res) {
+        try {
+            let input = req.body;
+            let data = await Service.getCategories(input);
+            res.json(data);
+        } catch (error) {
+            console.log("Cart ::error", error)
+            res.json({ status: false, error: error });
+
+        }
+    }
 }

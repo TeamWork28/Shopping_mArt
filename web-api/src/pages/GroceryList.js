@@ -4,9 +4,15 @@ import SearchIcon from "@mui/icons-material/Search";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import ProductCard from '../components/ProductCard';
 import { getProducts, getCategories } from '../apiService/product';
+import { getCarts, addCarts } from '../apiService/carts';
+
+import { useNavigate } from "react-router-dom";
 
 const GrocerySearchBar = () => {
-  const [cartCount, setCartCount] = useState(2); // Example cart items count
+
+  const navigate = useNavigate();
+
+  const [cartCount, setCartCount] = useState(0); // Example cart items count
   const [selected, setSelected] = useState("All");
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
@@ -16,9 +22,10 @@ const GrocerySearchBar = () => {
     const loadData = async () => {
       let categoriesRaw = await getCategories();
       setCategories(['All', ...categoriesRaw.data]);
+      let cartsRaw = await getCarts();
+      if (cartsRaw?.data?.items?.length) setCartCount(cartsRaw.data.items.length);
       syncProduct();
     };
-
     loadData();
   }, []);
 
@@ -41,7 +48,7 @@ const GrocerySearchBar = () => {
       >
         {/* Title */}
         <Typography variant="h6" sx={{ fontWeight: 600, color: 'black' }}>
-          Grocery List
+          Dashboard
         </Typography>
 
         {/* Search Bar */}
@@ -64,7 +71,7 @@ const GrocerySearchBar = () => {
         />
 
         {/* Cart Icon */}
-        <IconButton>
+        <IconButton onClick={() => navigate('/checkout')}>
           <Badge badgeContent={cartCount} color="success">
             <ShoppingCartIcon fontSize="medium" />
           </Badge>
@@ -118,6 +125,7 @@ const GrocerySearchBar = () => {
         {
           products.map((product, key) => (
             <ProductCard
+              id={product._id}
               name={product.name}
               image={product.image}
               price={product.price}

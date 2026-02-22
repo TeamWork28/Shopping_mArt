@@ -1,75 +1,187 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   Box,
+  Card,
+  CardContent,
   Typography,
-  IconButton,
-  Grid,
-  Paper,
   TextField,
   Button,
+  Divider,
+  Avatar,
+  Radio,
+  RadioGroup,
+  FormControlLabel,
 } from "@mui/material";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import DeliveryInformation from "../components/DeliveryInformation";
+
+import { getCarts, addCarts } from '../apiService/carts';
+
 
 export default function Checkout() {
-  return (
-    <Box sx={{ backgroundColor: "#f5f6f8", minHeight: "100vh", py: 5 }}>
-      {/* CENTER CONTAINER */}
-      <Box sx={{ maxWidth: 1000, mx: "auto", px: 3 }}>
+  const [carts, setCarts] = useState([]);
 
-        {/* HEADER */}
-        <Box display="flex" alignItems="center" mb={4}>
-          <IconButton sx={{ mr: 1 }}>
-            <ArrowBackIcon />
-          </IconButton>
-          <Typography variant="h4" fontWeight={700}>
-            Checkout
-          </Typography>
+
+  const subtotal = carts.reduce(
+    (acc, item) => acc + item.product.price * item.quantity,
+    0
+  );
+  const shipping = 3.99;
+  const total = subtotal + shipping;
+
+  useEffect(() => {
+    const loadData = async () => {
+
+      let cartsRaw = await getCarts();
+      if (cartsRaw?.data?.items?.length) setCarts(cartsRaw.data.items);
+    };
+    loadData();
+  }, []);
+
+
+  return (
+    <Box >
+      <Box
+        sx={{
+          maxWidth: "1200px",
+          margin: "0 auto",
+          display: "flex",
+          gap: 4,
+        }}
+      >
+        {/* LEFT SIDE */}
+        <Box sx={{ flex: 2 }}>
+          {/* Delivery */}
+          <Card sx={{ mb: 4, borderRadius: 3, boxShadow: 4 }}>
+            <CardContent sx={{ p: 4 }}>
+              <Typography variant="h6" fontWeight="bold" mb={3}>
+                Delivery Information
+              </Typography>
+
+              <Box sx={{ display: "flex", flexDirection: "column", gap: 3 }}>
+                <TextField fullWidth label="Full Name" />
+                <TextField fullWidth label="Address" />
+
+                <Box sx={{ display: "flex", gap: 2 }}>
+                  <TextField fullWidth label="City" />
+                  <TextField fullWidth label="Zip Code" />
+                </Box>
+
+                <TextField fullWidth label="Phone Number" />
+              </Box>
+            </CardContent>
+          </Card>
+
+          {/* Payment */}
+          <Card sx={{ borderRadius: 3, boxShadow: 4 }}>
+            <CardContent sx={{ p: 4 }}>
+              <Typography variant="h6" fontWeight="bold" mb={3}>
+                Payment Method
+              </Typography>
+
+              <RadioGroup defaultValue="cod">
+                <FormControlLabel
+                  value="cod"
+                  control={<Radio />}
+                  label="Cash on Delivery"
+                />
+                <FormControlLabel
+                  value="card"
+                  control={<Radio />}
+                  label="Credit / Debit Card"
+                />
+                <FormControlLabel
+                  value="upi"
+                  control={<Radio />}
+                  label="UPI Payment"
+                />
+              </RadioGroup>
+
+              <Button
+                variant="contained"
+                fullWidth
+                size="large"
+                sx={{
+                  mt: 4,
+                  py: 1.5,
+                  borderRadius: 2,
+                  fontWeight: "bold",
+                }}
+              >
+                Place Order
+              </Button>
+            </CardContent>
+          </Card>
         </Box>
 
-        {/* DELIVERY INFO */}
-        <DeliveryInformation />
+        {/* RIGHT SIDE */}
+        <Box sx={{ flex: 1 }}>
+          <Card sx={{ borderRadius: 3, boxShadow: 5 }}>
+            <CardContent sx={{ p: 4 }}>
+              <Typography variant="h6" fontWeight="bold" mb={3}>
+                Order Summary
+              </Typography>
 
-        {/* PAYMENT */}
-        <Typography variant="h6" fontWeight={600} mt={5} mb={2}>
-          Payment Method
-        </Typography>
+              {carts.map((item, index) => (
+                <Box key={index} sx={{ mb: 3 }}>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                    }}
+                  >
+                    <Box sx={{ display: "flex", gap: 2 }}>
+                      <Avatar
+                        variant="rounded"
+                        src={item.product.image}   // or item.image
+                        alt={item.product.name}
+                        sx={{ width: 60, height: 60 }}
+                      />
+                      <Box>
+                        <Typography fontWeight={500}>
+                          {item.product.name}
+                        </Typography>
+                        <Typography variant="body2" color="text.secondary">
+                          Qty: {item.quantity}
+                        </Typography>
+                      </Box>
+                    </Box>
+                    <Typography fontWeight="bold">
+                      ${(item.product.price * item.quantity).toFixed(2)}
+                    </Typography>
+                  </Box>
 
-        <Paper sx={cardStyle}>
-          <Box display="flex" gap={2}>
-            <Button variant="outlined" sx={paymentBtn}>
-              Credit Card
-            </Button>
-            <Button variant="outlined" sx={paymentBtn}>
-              UPI
-            </Button>
-            <Button variant="outlined" sx={paymentBtn}>
-              Cash
-            </Button>
-          </Box>
-        </Paper>
+                  {index !== item.product.length - 1 && (
+                    <Divider sx={{ mt: 2 }} />
+                  )}
+                </Box>
+              ))}
 
-        {/* ORDER SUMMARY TITLE */}
-        <Typography variant="h6" fontWeight={600} mt={6}>
-          Order Summary
-        </Typography>
+              <Divider sx={{ my: 3 }} />
 
+              <Box display="flex" justifyContent="space-between">
+                <Typography>Subtotal</Typography>
+                <Typography>${subtotal.toFixed(2)}</Typography>
+              </Box>
+
+              <Box display="flex" justifyContent="space-between" mt={1}>
+                <Typography>Shipping</Typography>
+                <Typography>${shipping.toFixed(2)}</Typography>
+              </Box>
+
+              <Divider sx={{ my: 2 }} />
+
+              <Box display="flex" justifyContent="space-between">
+                <Typography variant="h6" fontWeight="bold">
+                  Total
+                </Typography>
+                <Typography variant="h6" fontWeight="bold" color="primary">
+                  ${total.toFixed(2)}
+                </Typography>
+              </Box>
+            </CardContent>
+          </Card>
+        </Box>
       </Box>
     </Box>
   );
 }
-
-/* ===== STYLES ===== */
-
-const cardStyle = {
-  p: 4,
-  borderRadius: 3,
-  backgroundColor: "#ffffff",
-  boxShadow: "0 2px 10px rgba(0,0,0,0.04)",
-};
-
-const paymentBtn = {
-  flex: 1,
-  borderRadius: 2,
-  textTransform: "none",
-};

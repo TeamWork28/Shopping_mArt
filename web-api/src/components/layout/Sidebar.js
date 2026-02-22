@@ -2,15 +2,26 @@ import React from "react";
 import { Box, List, ListItemButton, ListItemIcon, ListItemText, Button } from "@mui/material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import CheckBoxIcon from "@mui/icons-material/CheckBox";
-import LocalMallIcon from "@mui/icons-material/LocalMall";
+import LogoutIcon from "@mui/icons-material/Logout";
 import { useNavigate } from "react-router-dom";
+import { deleteCookie } from "../../helper/cookie"
 
 const menuItems = [
-  { text: "Grocery List", icon: <CheckBoxIcon />, active: true, path: "/" },
+  { text: "Grocery List", icon: <CheckBoxIcon />, active: true, path: "/products" },
 ];
 
-const Sidebar = () => {
+export default function Sidebar() {
+  
   const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    try {
+      deleteCookie("token")
+      navigate("/");
+    } catch (error) {
+      console.error("Logout failed", error);
+    }
+  };
 
   return (
     <Box
@@ -65,15 +76,13 @@ const Sidebar = () => {
       {/* Bottom Section: Checkout Button */}
       <Button
         variant="contained"
-        onClick={() => navigate('/checkout')}
-        color="success"
+        onClick={handleLogout}
+        color="error"
         sx={{ borderRadius: 2, textTransform: "none", py: 1.5 }}
-        endIcon={<LocalMallIcon />}
+        endIcon={<LogoutIcon />}
       >
-        Checkout
+        Log out
       </Button>
     </Box>
   );
 };
-
-export default Sidebar;

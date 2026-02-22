@@ -31,8 +31,12 @@ module.exports = {
     },
     getCart: async function (input) {
         try {
-            let data = await carts.find({ user: input.userId });
-
+            let data = await carts.findOne({ user: input.userId })
+                .populate({
+                    path: "items.product",
+                    select: "name price image", // only required fields
+                })
+                .lean();
             return { status: true, data: data };
         } catch (error) {
             console.log("Cart ::error", error)
