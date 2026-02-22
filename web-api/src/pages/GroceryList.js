@@ -15,7 +15,7 @@ const GrocerySearchBar = () => {
   useEffect(() => {
     const loadData = async () => {
       let categoriesRaw = await getCategories();
-      setCategories(['All', ...categoriesRaw]);
+      setCategories(['All', ...categoriesRaw.data]);
       syncProduct();
     };
 
@@ -27,7 +27,7 @@ const GrocerySearchBar = () => {
     let filter = {};
     if (item && item != 'All') filter["category"] = item;
     let productsRaw = await getProducts(filter);
-    setProducts(productsRaw);
+    setProducts(productsRaw.data);
   }
 
   return (

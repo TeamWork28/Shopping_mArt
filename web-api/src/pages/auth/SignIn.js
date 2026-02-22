@@ -13,11 +13,45 @@ import {
 import { Visibility, VisibilityOff, Email, Lock } from "@mui/icons-material";
 import ThemeImage from '../../asserts/theme_image.png'
 import { useNavigate } from "react-router-dom";
+import { signIn } from '../../apiService/auth';
+import { setCookie,getCookie } from '../../helper/cookie'
 
 export default function SignInDesktop() {
     const navigate = useNavigate();
 
     const [showPassword, setShowPassword] = useState(false);
+
+    const [err, setErr] = useState(false);
+
+    const [formData, setFormData] = useState({
+        "email": null,
+        "password": null,
+        "role": "699a896c50e8b6b721a63600"
+    });
+
+    const hendleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData(prev => ({
+            ...prev,
+            [name]: value
+        }));
+    };
+
+    const submitForm = async () => {
+
+        if (!formData.email || !formData.password) return setErr(true);
+        
+        let response = await signIn(formData);
+
+        console.log(response)
+
+        if (!response.status) return setErr(true);
+
+        await setCookie('token',response.token,7);
+
+        navigate('/products');
+    }
+
 
     return (
         <Box sx={{ height: "100vh" }}>
@@ -79,6 +113,9 @@ export default function SignInDesktop() {
                             size="medium"
                             margin="normal"
                             label="Email"
+                            name='email'
+                            value={formData.email}
+                            onChange={hendleChange}
                             InputProps={{
                                 startAdornment: (
                                     <InputAdornment position="start">
@@ -93,6 +130,9 @@ export default function SignInDesktop() {
                             size="medium"
                             margin="normal"
                             label="Password"
+                            name="password"
+                            value={formData.password}
+                            onChange={hendleChange}
                             type={showPassword ? "text" : "password"}
                             InputProps={{
                                 startAdornment: (
@@ -125,6 +165,7 @@ export default function SignInDesktop() {
                         <Button
                             fullWidth
                             variant="contained"
+                            onClick={submitForm}
                             sx={{
                                 mt: 3,
                                 py: 1.4,

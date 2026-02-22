@@ -2,6 +2,8 @@
     "api_config_v1": {
         "host": "http://localhost:3001",
         "routes": {
+            "sign_up": "/api/v1/users/sign/up",
+            "sign_in": "/api/v1/users/sign/in",
             "get_products": "/api/v1/products/list",
             "get_categories": "/api/v1/categories/list"
         }

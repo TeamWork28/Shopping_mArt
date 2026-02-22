@@ -1,7 +1,6 @@
 export async function RestCall(method, url, body = false, headers = { "Content-Type": "application/json" }) {
     try {
 
-
         let option = {};
 
         if (method) option["method"] = method;
@@ -14,7 +13,7 @@ export async function RestCall(method, url, body = false, headers = { "Content-T
         
         let data = await response.json();
 
-        return data.data;
+        return data;
 
     } catch (error) {
         console.log("@RestCall :: Error",error);

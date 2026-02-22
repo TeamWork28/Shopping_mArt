@@ -1,0 +1,19 @@
+db.roles.insertMany([
+  {
+    name: "CUSTOMER",
+    permissions: ["VIEW_ORDERS"],
+    createdAt: new Date(),
+    updatedAt: new Date()
+  },
+  {
+    name: "VENDOR",
+    permissions: [
+      "CREATE_PRODUCT",
+      "UPDATE_PRODUCT",
+      "DELETE_PRODUCT",
+      "VIEW_ORDERS"
+    ],
+    createdAt: new Date(),
+    updatedAt: new Date()
+  }
+]);
