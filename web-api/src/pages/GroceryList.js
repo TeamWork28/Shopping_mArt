@@ -16,6 +16,7 @@ const GrocerySearchBar = () => {
   const [selected, setSelected] = useState("All");
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
+  const [searchItem, setSearchItem] = useState(null);
 
 
   useEffect(() => {
@@ -33,6 +34,7 @@ const GrocerySearchBar = () => {
     setSelected(item);
     let filter = {};
     if (item && item != 'All') filter["category"] = item;
+    if(searchItem) filter["name"] = searchItem;
     let productsRaw = await getProducts(filter);
     setProducts(productsRaw.data);
   }
@@ -58,6 +60,12 @@ const GrocerySearchBar = () => {
           justifyContent="center"
           size="small"
           sx={{ flexGrow: 1, mx: 2 }}
+          onKeyDown={(e)=>{
+            if (e.key === "Enter") syncProduct();
+    
+          }}
+          value={searchItem}
+          onChange={(e)=>setSearchItem(e.target.value)}
           InputProps={{
             endAdornment: (
               <InputAdornment position="end">
