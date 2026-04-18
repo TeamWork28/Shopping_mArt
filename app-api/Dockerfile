@@ -1,0 +1,18 @@
+FROM node:23
+
+WORKDIR /app-api
+
+COPY package.json .
+
+RUN npm install
+
+COPY . .
+
+EXPOSE 5000
+
+CMD ["node", "app.js"]
+
+
+
+
+
