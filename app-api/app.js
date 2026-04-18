@@ -7,7 +7,13 @@ const app = express();
 const PORT = process.env.PORT;
 
 const connectDB = require('./Src/helper/ConnectMongoDB');
-connectDB();
+const startServer = async () => {
+  await connectDB();
+
+  app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+  });
+};
 
 app.use(helmet());
 
@@ -47,6 +53,4 @@ app.use((err, req, res, next) => {
 });
 
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+startServer();
