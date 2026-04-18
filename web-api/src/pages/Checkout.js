@@ -12,6 +12,7 @@ import {
   RadioGroup,
   FormControlLabel,
 } from "@mui/material";
+import defaultImg from "../asserts/no_image.png";
 
 import { getCarts, addCarts } from '../apiService/carts';
 
@@ -132,8 +133,12 @@ export default function Checkout() {
                     <Box sx={{ display: "flex", gap: 2 }}>
                       <Avatar
                         variant="rounded"
-                        src={item.product.image}   // or item.image
+                        src={item.product.image || defaultImg}
                         alt={item.product.name}
+                        onError={(e) => {
+                          e.currentTarget.onerror = null;
+                          e.currentTarget.src = defaultImg;
+                        }}
                         sx={{ width: 60, height: 60 }}
                       />
                       <Box>
