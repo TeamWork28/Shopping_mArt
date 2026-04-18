@@ -58,7 +58,7 @@ export default function SignUpDesktop() {
 
         let response = await signUp(userData);
 
-        if(!response.status) return setErr(true);
+        if(!response?.status) return setErr(true);
 
         navigate('/');
     }

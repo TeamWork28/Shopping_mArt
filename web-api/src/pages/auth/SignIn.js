@@ -45,7 +45,7 @@ export default function SignInDesktop() {
 
         console.log(response)
 
-        if (!response.status) return setErr(true);
+        if (!response?.status) return setErr(true);
 
         await setCookie('token',response.token,7);
 
