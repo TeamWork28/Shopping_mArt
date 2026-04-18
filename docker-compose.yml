@@ -1,25 +1,18 @@
 services:
   web-api:
-    build:
-      context: ./web-api
+    image: usersystem5285/web-api:v1 
     ports:
-      - "4000:3000"
+      - "4000:4000"
     networks:
       - frontend
       - backend
     restart: unless-stopped
-    depends_on:
-      - app-api
+    command: 
 
   app-api:
-    build:
-      context: ./app-api
+    image: usersystem5285/app-api:v1 
     ports:
-      - "5000:3001"
-    environment:
-      PORT: 3001
-      MONGO_URI: mongodb://db:27017/grocery_mart
-      JWT_SECRET: mysec
+      - "5000:5000"
     networks:
       - backend
     restart: unless-stopped
@@ -49,5 +42,4 @@ networks:
 
 volumes:
   mondb:
-
 
