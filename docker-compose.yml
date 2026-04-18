@@ -1,8 +1,8 @@
 services:
   web-api:
-    image: usersystem5285/web-api:v1 
+    image: usersystem5285/web-api:v2 
     ports:
-      - "4000:4000"
+      - "4340:4340" 
     networks:
       - frontend
       - backend
