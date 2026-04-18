@@ -1,6 +1,6 @@
 {
     "api_config_v1": {
-        "host": "http://localhost:3001",
+        "host": "http://localhost:5000",
         "routes": {
             "sign_up": "/api/v1/users/sign/up",
             "sign_in": "/api/v1/users/sign/in",
