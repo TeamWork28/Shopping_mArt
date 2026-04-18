@@ -2,12 +2,12 @@ services:
   web-api:
     image: usersystem5285/web-api:v1 
     ports:
-      - "4000:4000"
+      - "4340:4340"
     networks:
       - frontend
       - backend
     restart: unless-stopped
-    command: 
+    command: ["sh", "-c", "npm install && npm start"]
 
   app-api:
     image: usersystem5285/app-api:v1 
@@ -19,6 +19,7 @@ services:
     depends_on:
       db:
         condition: service_healthy
+    command: ["sh", "-c", "npm install && npm start"]
 
   db:
     image: mongo:7
