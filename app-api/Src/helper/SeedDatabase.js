@@ -18,15 +18,22 @@ function extractArrayFromMigration(filePath, collectionName) {
   return eval(`(${match[1]})`);
 }
 
-async function seedCollection(Model, data, label) {
-  const count = await Model.countDocuments();
-  if (count > 0) {
-    console.log(`Seed skipped for ${label}; ${count} documents already exist.`);
+async function seedCollection(Model, data, label, matchKey = 'name') {
+  const operations = data.map((item) => ({
+    updateOne: {
+      filter: { [matchKey]: item[matchKey] },
+      update: { $set: item },
+      upsert: true,
+    },
+  }));
+
+  if (!operations.length) {
+    console.log(`Seed skipped for ${label}; no records found.`);
     return;
   }
 
-  await Model.insertMany(data);
-  console.log(`Seeded ${label} with ${data.length} documents.`);
+  await Model.bulkWrite(operations, { ordered: false });
+  console.log(`Synced ${label} with ${data.length} records.`);
 }
 
 async function seedDatabase() {
